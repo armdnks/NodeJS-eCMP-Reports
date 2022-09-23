@@ -92,10 +92,50 @@ exports.logoutUser = async (req, res) => {
 exports.getMe = async (req, res) => {
   const user = await User.findOne({
     where: { id: req.user.id },
-    attributes: ["name", "email"],
+    // attributes: ["name", "email"],
   });
 
-  res.status(200).json({ success: true, data: user });
+  sendTokenResponse(user, 200, res);
+
+  // res.status(200).json({ success: true, user });
+};
+
+/**
+ *  ### UPDATE ME
+ *
+ *  @method   PUT
+ *  @route    /api/v1/auth/me
+ *  @access   private
+ *
+ */
+
+exports.updateMe = async (req, res) => {
+  let user = await User.findOne({
+    where: { id: req.user.id },
+  });
+
+  if (!user) throw new ErrorResponse("User not found", 404);
+
+  const { name, email, password, confirmPassword, role } = req.body;
+  if (password !== confirmPassword) {
+    throw new ErrorResponse("Password does not match", 400);
+  }
+
+  user = await User.update(
+    {
+      name: name || user.name,
+      email: email || user.email,
+      password: password || user.password,
+      role: role || user.role,
+    },
+    {
+      where: { id: user.id },
+    }
+  );
+
+  user = await User.findOne({ where: { id: req.user.id } });
+
+  res.status(200).json({ success: true, user });
 };
 
 /**
@@ -114,5 +154,5 @@ const sendTokenResponse = (user, statusCode, res) => {
 
   if (process.env.NODE_ENV === "production") options.secure = true;
 
-  res.status(statusCode).cookie("token", token, options).json({ success: true, token });
+  res.status(statusCode).cookie("token", token, options).json({ success: true, token, user });
 };

@@ -13,8 +13,8 @@ const db = require("./config/database");
 db.sync();
 
 // SUPPORT LIBRARY
-const cors = require("cors");
-app.use(cors());
+// const cors = require("cors");
+// app.use(cors());
 const morgan = require("morgan");
 if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 

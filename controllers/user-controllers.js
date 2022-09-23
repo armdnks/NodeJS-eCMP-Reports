@@ -20,7 +20,7 @@ const User = require("../models/user-model");
 
 exports.getAllUsers = async (req, res) => {
   const users = await User.findAll();
-  res.status(200).json({ success: true, count: users.length, data: users });
+  res.status(200).json({ success: true, count: users.length, users });
 };
 
 /**
@@ -51,7 +51,7 @@ exports.getSingleUser = async (req, res) => {
 
   if (!user) throw new ErrorResponse("User not found", 404);
 
-  res.status(200).json({ success: true, data: user });
+  res.status(200).json({ success: true, user });
 };
 
 /**
@@ -82,7 +82,7 @@ exports.createUser = async (req, res) => {
 
   const user = await User.create({ name, email, password, role });
 
-  res.status(201).json({ success: true, data: user });
+  res.status(201).json({ success: true, user });
 };
 
 /**
@@ -127,7 +127,9 @@ exports.updateUser = async (req, res) => {
     }
   );
 
-  res.status(200).json({ success: true, data: user });
+  user = await User.findOne({ where: { id: req.params.id } });
+
+  res.status(200).json({ success: true, user });
 };
 
 /**
@@ -153,5 +155,5 @@ exports.deleteUser = async (req, res) => {
     where: { id: user.id },
   });
 
-  res.status(200).json({ success: true, data: {} });
+  res.status(200).json({ success: true, user: {} });
 };

@@ -27,7 +27,7 @@ exports.getAllReports = async (req, res) => {
     include: [{ model: User, attributes: ["name", "email"] }],
   });
 
-  res.status(201).json({ success: true, cout: reports.length, data: reports });
+  res.status(201).json({ success: true, cout: reports.length, reports });
 };
 
 /**
@@ -63,7 +63,7 @@ exports.getSingleReport = async (req, res) => {
 
   if (!report) throw new ErrorResponse("Report not found", 404);
 
-  res.status(200).json({ success: true, data: report });
+  res.status(200).json({ success: true, report });
 };
 
 /**
@@ -91,7 +91,7 @@ exports.createReport = async (req, res) => {
   req.body.userId = isAdminID;
 
   const report = await Report.create(req.body);
-  res.status(201).json({ success: true, data: report });
+  res.status(201).json({ success: true, report });
 };
 
 /**
@@ -126,7 +126,9 @@ exports.updateReport = async (req, res) => {
     where: isAdmin,
   });
 
-  res.status(200).json({ success: true, data: report });
+  report = await Report.findOne({ where: isAdmin });
+
+  res.status(200).json({ success: true, report });
 };
 
 /**
@@ -157,5 +159,5 @@ exports.deleteReport = async (req, res) => {
     where: isAdmin,
   });
 
-  res.status(200).json({ success: true, data: {} });
+  res.status(200).json({ success: true, report: {} });
 };

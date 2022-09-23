@@ -45,7 +45,7 @@ const User = db.define(
   }
 );
 
-User.beforeCreate(async (user, options) => {
+User.beforeValidate(async (user, options) => {
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
 });
