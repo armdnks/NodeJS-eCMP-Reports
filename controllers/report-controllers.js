@@ -87,8 +87,6 @@ exports.getSingleReport = async (req, res) => {
  */
 
 exports.createReport = async (req, res) => {
-  console.log(req.body);
-  console.log(req.user);
   const isAdminID = req.user.role === "admin" ? req.body.userId : req.user.id;
   req.body.userId = isAdminID;
 
