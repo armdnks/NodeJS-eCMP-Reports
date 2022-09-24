@@ -22,11 +22,26 @@ const User = require("../models/user-model");
 exports.registerUser = async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
 
-  if (password !== confirmPassword) {
+  if (!name || !email) {
+    throw new ErrorResponse("Please provide name or email", 400);
+  } else if (!password) {
+    throw new ErrorResponse("Please provide password", 400);
+  } else if (!confirmPassword) {
+    throw new ErrorResponse("Please confirm password", 400);
+  } else if (password !== confirmPassword) {
     throw new ErrorResponse("Password does not match", 400);
   }
 
-  const user = await User.create({ name, email, password });
+  const user = await User.create(
+    {
+      name,
+      email,
+      password,
+    },
+    {
+      individualHooks: true,
+    }
+  );
 
   sendTokenResponse(user, 200, res);
 };
@@ -50,7 +65,7 @@ exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    throw new ErrorResponse("Please provide an email and password", 400);
+    throw new ErrorResponse("Please provide email or password", 400);
   }
 
   const user = await User.findOne({ where: { email } });
@@ -130,6 +145,7 @@ exports.updateMe = async (req, res) => {
     },
     {
       where: { id: user.id },
+      individualHooks: true,
     }
   );
 

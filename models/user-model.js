@@ -29,7 +29,7 @@ const User = db.define(
       validate: { notEmpty: true, isEmail: true },
     },
     password: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
       validate: { notEmpty: true },
     },
@@ -45,7 +45,12 @@ const User = db.define(
   }
 );
 
-User.beforeValidate(async (user, options) => {
+User.beforeCreate(async (user, options) => {
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(user.password, salt);
+});
+
+User.beforeUpdate(async (user, options) => {
   const salt = await bcrypt.genSalt(10);
   user.password = await bcrypt.hash(user.password, salt);
 });

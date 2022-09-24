@@ -27,7 +27,7 @@ exports.getAllReports = async (req, res) => {
     include: [{ model: User, attributes: ["name", "email"] }],
   });
 
-  res.status(201).json({ success: true, cout: reports.length, reports });
+  res.status(201).json({ success: true, count: reports.length, reports });
 };
 
 /**
@@ -87,6 +87,8 @@ exports.getSingleReport = async (req, res) => {
  */
 
 exports.createReport = async (req, res) => {
+  console.log(req.body);
+  console.log(req.user);
   const isAdminID = req.user.role === "admin" ? req.body.userId : req.user.id;
   req.body.userId = isAdminID;
 
