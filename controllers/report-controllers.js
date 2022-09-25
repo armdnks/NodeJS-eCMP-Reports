@@ -25,18 +25,18 @@ const User = require("../models/user-model");
 exports.getAllReports = async (req, res) => {
   const { search } = req.query;
 
-  const isAdmin = req.user.role === "admin" ? null : req.user.id;
+  const isAdmin = req.user.role === "admin" ? null : { userId: req.user.id };
   const searchQuery = search ? [{ brand: { [Op.like]: "%" + search + "%" } }] : [];
 
   const reports = await Report.findAll({
     where: {
-      userId: isAdmin,
       [Op.and]: searchQuery,
     },
+    isAdmin,
     include: [{ model: User, attributes: ["name", "email"] }],
   });
 
-  res.status(201).json({ success: true, count: reports.length, reports });
+  res.status(200).json({ success: true, count: reports.length, reports });
 };
 
 /**
@@ -96,8 +96,8 @@ exports.getSingleReport = async (req, res) => {
  */
 
 exports.createReport = async (req, res) => {
-  const isAdminID = req.user.role === "admin" ? req.body.userId : req.user.id;
-  req.body.userId = isAdminID;
+  // const isAdminID = req.user.role === "admin" ? req.body.userId : req.user.id;
+  req.body.userId = req.user.id;
 
   const report = await Report.create(req.body);
   res.status(201).json({ success: true, report });
