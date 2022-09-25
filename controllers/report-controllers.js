@@ -26,13 +26,12 @@ exports.getAllReports = async (req, res) => {
   const { search } = req.query;
 
   const isAdmin = req.user.role === "admin" ? null : { userId: req.user.id };
+
   const searchQuery = search ? [{ brand: { [Op.like]: "%" + search + "%" } }] : [];
+  const searchSQL = { [Op.and]: searchQuery };
 
   const reports = await Report.findAll({
-    where: {
-      [Op.and]: searchQuery,
-    },
-    isAdmin,
+    where: Object.assign(searchSQL, isAdmin),
     include: [{ model: User, attributes: ["name", "email"] }],
   });
 

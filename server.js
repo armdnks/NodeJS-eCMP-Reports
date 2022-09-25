@@ -1,5 +1,5 @@
 require("colors");
-require("dotenv").config({ path: "./config/config.env" });
+require("dotenv").config();
 require("express-async-errors");
 
 // EXPRESS
