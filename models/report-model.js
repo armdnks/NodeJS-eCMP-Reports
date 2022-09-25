@@ -16,42 +16,42 @@ const Report = db.define(
     },
     brand: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     patient_first_name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     patient_last_name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     patient_gender: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     patient_age: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     therapy_start_date: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     therapy_end_date: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     indication_common: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     indication_other: {
@@ -61,12 +61,12 @@ const Report = db.define(
     },
     total_dosing_per_cycle: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     clinical_result: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     s_effects_mild_grade: {
@@ -101,22 +101,22 @@ const Report = db.define(
     },
     md_name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     md_clinic: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     md_phone: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     md_email: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: { notEmpty: true },
     },
     userId: {
