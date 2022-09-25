@@ -16,42 +16,42 @@ const Report = db.define(
     },
     brand: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     patient_first_name: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     patient_last_name: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     patient_gender: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     patient_age: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     therapy_start_date: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     therapy_end_date: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     indication_common: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     indication_other: {
@@ -61,12 +61,12 @@ const Report = db.define(
     },
     total_dosing_per_cycle: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     clinical_result: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     s_effects_mild_grade: {
@@ -84,7 +84,7 @@ const Report = db.define(
       allowNull: true,
       validate: { notEmpty: false },
     },
-    s_effects_moderate_grade: {
+    s_effects_moderate_desc: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: { notEmpty: false },
@@ -94,29 +94,29 @@ const Report = db.define(
       allowNull: true,
       validate: { notEmpty: false },
     },
-    s_effects_severe_grade: {
+    s_effects_severe_desc: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: { notEmpty: false },
     },
     md_name: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     md_clinic: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     md_phone: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     md_email: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: { notEmpty: true },
     },
     userId: {
