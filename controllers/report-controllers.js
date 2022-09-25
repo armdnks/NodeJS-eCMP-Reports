@@ -1,3 +1,6 @@
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
+
 const ErrorResponse = require("../utils/error-response");
 const Report = require("../models/report-model");
 const User = require("../models/user-model");
@@ -20,10 +23,16 @@ const User = require("../models/user-model");
  */
 
 exports.getAllReports = async (req, res) => {
-  const isAdmin = req.user.role === "admin" ? null : { userId: req.user.id };
+  const { search } = req.query;
+
+  const isAdmin = req.user.role === "admin" ? null : req.user.id;
+  const searchQuery = search ? [{ brand: { [Op.like]: "%" + search + "%" } }] : [];
 
   const reports = await Report.findAll({
-    where: isAdmin,
+    where: {
+      userId: isAdmin,
+      [Op.and]: searchQuery,
+    },
     include: [{ model: User, attributes: ["name", "email"] }],
   });
 

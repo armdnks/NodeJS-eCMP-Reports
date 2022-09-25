@@ -84,7 +84,7 @@ const Report = db.define(
       allowNull: true,
       validate: { notEmpty: false },
     },
-    s_effects_moderate_grade: {
+    s_effects_moderate_desc: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: { notEmpty: false },
@@ -94,7 +94,7 @@ const Report = db.define(
       allowNull: true,
       validate: { notEmpty: false },
     },
-    s_effects_severe_grade: {
+    s_effects_severe_desc: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: { notEmpty: false },
