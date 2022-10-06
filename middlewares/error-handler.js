@@ -8,7 +8,7 @@ const errorHandler = (err, req, res, next) => {
 
   if (err.name === "SequelizeValidationError") {
     let fields = [...new Set(Object.values(err.errors).map((value) => value.path))];
-    console.log(fields);
+    // console.log(fields);
     let message = `Please provide ${fields.join(" & ")}`;
 
     error = new ErrorResponse(message, 400);
