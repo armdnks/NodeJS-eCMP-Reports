@@ -57,7 +57,7 @@ const Report = db.define(
       type: DataTypes.STRING,
       defaultValue: "",
     },
-    s_effects_mild_grade: {
+    s_effects_mild: {
       type: DataTypes.STRING,
       defaultValue: "",
     },
@@ -65,7 +65,7 @@ const Report = db.define(
       type: DataTypes.STRING,
       defaultValue: "",
     },
-    s_effects_moderate_grade: {
+    s_effects_moderate: {
       type: DataTypes.STRING,
       defaultValue: "",
     },
@@ -73,7 +73,7 @@ const Report = db.define(
       type: DataTypes.STRING,
       defaultValue: "",
     },
-    s_effects_severe_grade: {
+    s_effects_severe: {
       type: DataTypes.STRING,
       defaultValue: "",
     },
